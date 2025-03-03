@@ -4,7 +4,7 @@ import { useRouteMatch, useHistory } from "react-router-dom";
 import { Spinner, Box } from "@chakra-ui/react";
 
 const API_ENDPOINT =
-  process.env.REACT_APP_SERVER_ENDPOINT || "http://localhost:3001";
+  process.env.REACT_APP_SERVER_ENDPOINT || "http://localhost:4000/api";
 
 function HandleRedirectContainer() {
   const [destination, setDestination] = useState<null | string>(null);

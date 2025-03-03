@@ -12,5 +12,5 @@ export const config = {
     dbPort: process.env.DB_PORT,
     jwtSecret: process.env.JWT_SECRET || 'secret',
     nodeEnv: process.env.NODE_ENV || 'development',
-    siteUrl: process.env.SITE_URL || 'https://localhost:3000/'
+    siteUrl: process.env.SITE_URL || 'http://localhost:3000/'
 };

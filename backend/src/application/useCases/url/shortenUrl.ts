@@ -1,11 +1,7 @@
 import { URLRepository } from "../../../infra/repositories/URLRepository";
 import { URL } from "../../../domain/entities/URL";
 import { inject, injectable } from "tsyringe";
-
-async function getNanoid() {
-    const { customAlphabet } = await import('nanoid');
-    return customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 6);
-}
+import { v4 as uuidv4 } from 'uuid';
 
 @injectable()
 export class ShortenURLUseCase {
@@ -23,8 +19,23 @@ export class ShortenURLUseCase {
             return existingUrl;
         }
 
-        const nanoid = await getNanoid();
-        const newUrl = URL.create(originalUrl, nanoid(), userId);
+        return this.generateUniqueShortUrl(originalUrl, userId);
+    }
+
+    private async generateUniqueShortUrl(originalUrl: string, userId?: string, attempts: number = 0): Promise<URL> {
+        const maxAttempts = 5;
+        if (attempts >= maxAttempts) {
+            throw new Error('Failed to generate a unique shortId');
+        }
+
+        const shortId = uuidv4().slice(0, 8);
+        const newUrl = URL.create(originalUrl, shortId, userId);
+
+        const existingUrl = await this.urlRepository.findByShortId(shortId);
+        if (existingUrl) {
+            return this.generateUniqueShortUrl(originalUrl, userId, attempts + 1);
+        }
+
         await this.urlRepository.save(newUrl);
         return newUrl;
     }

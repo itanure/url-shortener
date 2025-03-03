@@ -11,7 +11,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+      - ./mongo-entrypoint/:/docker-entrypoint-initdb.d/
     command: mongod
 
   backend:
@@ -20,16 +20,15 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     environment:
-      MONGO_URL: mongodb://deeporigin:1234@mongodb:27017/urlshortener
       DB_NAME: urlshortener
       DB_USER: deeporiginusr
       DB_PASS: 123456
       DB_HOST: mongodb
       DB_PORT: 27017
       JWT_SECRET: 984263e1379af92bddbac0ba50201821b2
-      SITE_URL: https://localhost:3000/
+      SITE_URL: http://localhost:3000/
     ports:
-      - "3001:3001"
+      - "4000:4000"
     depends_on:
       - mongodb
 

@@ -10,7 +10,7 @@ const UrlShortenerPage: React.FC = () => {
     const [copyMessage, setCopyMessage] = useState<string>('');
 
     const API_ENDPOINT = 
-        process.env.REACT_APP_SERVER_ENDPOINT || "http://localhost:3001";
+        process.env.REACT_APP_SERVER_ENDPOINT || "http://localhost:4000/api";
 
     const handleShorten = async () => {
         try {
