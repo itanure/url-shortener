@@ -1,0 +1,14 @@
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+    "username": "Igor Tanure",
+    "email": "igor.tanure@gmail.com",
+    "password": "securepassword2"
+}
+
+# {
+#     "username": "newuser",
+#     "email": "newuser@example.com",
+#     "password": "securepassword"
+# }
