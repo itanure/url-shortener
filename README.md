@@ -40,7 +40,7 @@ A full-stack URL shortener service built with Node.js, React, and MongoDB.
 
 2. Start the services using Docker Compose:
    ```sh
-   docker-compose up
+   docker-compose up --build
    ```
 
 3. Access the application:
